@@ -33,8 +33,6 @@ namespace AgendeApp
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            app.UseStatusCodePagesWithReExecute("/Performance/HandleError/{0}");
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>8c5dc171-f733-4941-a5b7-db7aa86aaa19</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chart.js" Version="3.7.1" />
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="MySql.Data" Version="8.0.29" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\menu\" />
+  </ItemGroup>
+
+</Project>

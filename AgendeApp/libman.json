@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "Chart.js@3.8.0",
+      "destination": "wwwroot/lib/Chart.js/"
+    },
+    {
+      "library": "axios@0.27.2",
+      "destination": "wwwroot/lib/axios/"
+    },
+    {
+      "library": "datatables.net@2.1.1",
+      "destination": "wwwroot/lib/datatables.net/"
+    },
+    {
+      "library": "bootstrap-multiselect@1.1.1",
+      "destination": "wwwroot/lib/bootstrap-multiselect/"
+    },
+    {
+      "library": "lodash.js@4.17.21",
+      "destination": "wwwroot/lib/lodash.js/"
+    }
+  ]
+}

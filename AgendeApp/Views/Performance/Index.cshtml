@@ -1,0 +1,188 @@
+﻿@using AgendeApp.Models.DB
+@using AgendeApp.Models.shared
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model BaseResult
+@{
+    
+}
+<h3>
+    Performance Por Consultor
+</h3>
+
+<div class="row">
+    
+    <div class="col-12 col-md-10">
+
+        @*  filters   *@
+        <div class="row">
+            <div class="col-12 col-md-2">
+                Período
+            </div>
+            <div class="col-12 col-md-10">
+                <div class="form-row">
+
+                    <div class="col">
+                        <div class="form-row">
+                            <div class="col font-weight-bold text-left">
+                                Start Date
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-3">
+                                <select id="initMonth" class="form-control">
+                                    <option value="1">Jan</option>
+                                    <option value="2">Fev</option>
+                                    <option value="3">Mar</option>
+                                    <option value="4">Abr</option>
+                                    <option value="5">May</option>
+                                    <option value="6">Jun</option>
+                                    <option value="7">Jul</option>
+                                    <option value="8">Ago</option>
+                                    <option value="9">Sep</option>
+                                    <option value="10">Oct</option>
+                                    <option value="11">Nov</option>
+                                    <option value="12">Dez</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12 col-md-3">
+                                <select id="initYear" class="form-control">
+                                    <option value="2003">2003</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2005">2005</option>
+                                    <option value="2006">2006</option>
+                                    <option value="2007">2007</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-row">
+                            <div class="col font-weight-bold text-left">
+                                End Date
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12 col-md-3">
+                                <select id="endMonth" class="form-control">
+                                    <option value="1">Jan</option>
+                                    <option value="2">Fev</option>
+                                    <option value="3">Mar</option>
+                                    <option value="4">Abr</option>
+                                    <option value="5">May</option>
+                                    <option value="6">Jun</option>
+                                    <option value="7">Jul</option>
+                                    <option value="8">Ago</option>
+                                    <option value="9">Sep</option>
+                                    <option value="10">Oct</option>
+                                    <option value="11">Nov</option>
+                                    <option value="12">Dez</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-12 col-md-3">
+                                <select id="endYear" class="form-control">
+                                    <option value="2003">2003</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2005">2005</option>
+                                    <option value="2006">2006</option>
+                                    <option value="2007">2007</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @*  consultants   *@
+        <div class="row">
+            <div class="col-auto col-md-2">
+                Consultores
+            </div>
+            <div class="col-12 col-md-10">
+                <div class="form-row">
+
+                    <div class="form-group col-12 col-md-6">
+                        @*<label for="exampleFormControlSelect1">Consultores</label>*@
+                        <select multiple="multiple" class="form-control" id="availableConsultants">
+                            @{
+                                if(Model != null)
+                                {
+                                    if(Model.Result == true)
+                                    {
+                                        List<Consultants> tempResult = (List<Consultants>)Model.Data;
+                                        foreach (var item in tempResult)
+                                        {
+                                            <option value="@item.UserId">@item.Name</option>      
+                                        }
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group col-12 col-md-6" >
+                        <ul id="ulSelectedConsultants"></ul>
+                    </div>
+                </div>
+                
+            </div>
+                
+        </div>
+    </div>
+
+    @*  actions   *@
+    <div class="col-12 col-md-2">
+        <div class="row justify-content-right">
+            <div class="col">
+                <div class="btn-group-vertical" role="group" aria-label="Actions">
+                    <button id="processRelatorio" class="btn btn-primary my-1">Relatório</button>
+                    <button id="processGrafico" class="btn btn-primary my-1">Gráfico</button>
+                    <button id="processPie" class="btn btn-primary my-1">Pizza</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div id="divRelatorio" class="row hiddenByDefaut">
+    <div class="col">
+        Relatorio
+        <br />
+        <table id="RelatorioTable" class="table table-striped table-bordered"></table>
+   </div>
+</div>
+
+<div id="divBarChart" class="row hiddenByDefaut justify-content-center">
+   @*<div class="col-10 offset-1 col-md-8 offset-md-2">*@
+    <div class="col-12">
+       <div class="bar-chart-container">
+           <canvas id="ConsultantsComericalPerformanceChart"></canvas>
+        </div>
+   </div>
+</div>
+
+<div id="divPieChart" class="row hiddenByDefaut justify-content-center">
+   @*<div class="col-8 offset-2 col-md-4 offset-md-4">*@
+    <div class="col-12">
+       <div class="pie-chart-container">
+           <canvas id="ConsultantsComericalPerformancePieChart"></canvas>
+       </div>
+   </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/PerformanceFunctions.js"></script>
+    <script>
+
+    $(document).ready( function () {
+        
+    } );
+        
+    </script>
+}

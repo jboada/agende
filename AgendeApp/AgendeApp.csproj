@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DBScripts\" />
     <Folder Include="wwwroot\img\menu\" />
   </ItemGroup>
 
